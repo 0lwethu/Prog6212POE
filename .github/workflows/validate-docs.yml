@@ -50,21 +50,21 @@ jobs:
 
       - name: Check SQL script
         run: |
-          if [ ! -f "docs/RaceDay.sql" ]; then
-            echo "ERROR: RaceDay.sql is missing."
+          if [ ! -f "docs/Raceday.sql" ]; then
+            echo "ERROR: Raceday.sql is missing."
             exit 1
           fi
 
-          echo "SUCCESS: RaceDay.sql exists."
+          echo "SUCCESS: Raceday.sql exists."
 
       - name: Check SQL script is not empty
         run: |
-          if [ ! -s "docs/RaceDay.sql" ]; then
-            echo "ERROR: RaceDay.sql is empty."
+          if [ ! -s "docs/Raceday.sql" ]; then
+            echo "ERROR: Raceday.sql is empty."
             exit 1
           fi
 
-          echo "SUCCESS: RaceDay.sql contains data."
+          echo "SUCCESS: Raceday.sql contains data."
 
       - name: Display documentation files
         run: |
