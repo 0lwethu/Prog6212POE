@@ -1,0 +1,79 @@
+name: RaceDay Documentation Validation
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+  pull_request:
+    branches:
+      - main
+      - master
+
+jobs:
+  validate-docs:
+    name: Validate RaceDay Documentation
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check docs folder
+        run: |
+          if [ ! -d "docs" ]; then
+            echo "ERROR: docs folder does not exist."
+            exit 1
+          fi
+
+          echo "SUCCESS: docs folder exists."
+
+      - name: Check ERD file
+        run: |
+          if [ ! -f "docs/ERD.jpeg" ]; then
+            echo "ERROR: ERD.jpeg is missing."
+            exit 1
+          fi
+
+          echo "SUCCESS: ERD.jpeg exists."
+
+      - name: Check API Endpoint Plan
+        run: |
+          if [ ! -f "docs/API-Endpoint-Plan.pdf" ]; then
+            echo "ERROR: API-Endpoint-Plan.pdf is missing."
+            exit 1
+          fi
+
+          echo "SUCCESS: API-Endpoint-Plan.pdf exists."
+
+      - name: Check SQL script
+        run: |
+          if [ ! -f "docs/RaceDay.sql" ]; then
+            echo "ERROR: RaceDay.sql is missing."
+            exit 1
+          fi
+
+          echo "SUCCESS: RaceDay.sql exists."
+
+      - name: Check SQL script is not empty
+        run: |
+          if [ ! -s "docs/RaceDay.sql" ]; then
+            echo "ERROR: RaceDay.sql is empty."
+            exit 1
+          fi
+
+          echo "SUCCESS: RaceDay.sql contains data."
+
+      - name: Display documentation files
+        run: |
+          echo "RaceDay documentation files:"
+          ls -lh docs/
+
+      - name: Validation complete
+        run: |
+          echo "========================================"
+          echo "RaceDay CI VALIDATION PASSED"
+          echo "========================================"
+          echo "All required documentation files exist."
